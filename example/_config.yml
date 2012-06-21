@@ -1,0 +1,3 @@
+jekyll_models: [projects, tests]
+jekyll_models_urls: rest-like
+site_base: http://localhost:4000/

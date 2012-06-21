@@ -1,0 +1,15 @@
+---
+layout: main
+---
+<h1>Hello Jekyll Models Test!</h1>
+Here are my models in a list:
+<ul>
+{% for model in site.jekyll_models %}
+<li>
+  <a href="{{ model }}/">Click here to see my {{ model }} model!</a>
+</li>
+{% endfor %}
+</ul>
+<br><br><br>
+And just for laughs, here is the site var: <br>
+{{ site }}

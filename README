@@ -1,0 +1,57 @@
+h1. JekyllModels
+
+Copyright (c) 2012 Kyle Paulsen. All Rights Reserved.
+Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
+
+h2. What is it?
+
+A generator that allows the user to make more jekyll objects like posts. It reads in YAML files from the specified directories and puts all of the information into the global site variable for easy access. It can also generate Model pages.
+
+h2. Usage:
+
+* Put jekyll_models.rb in your _plugins directory.
+* Edit your _config.yml to have a jekyll_models property (For this example, I will set it to [projects, tests]
+* Make the coorisponding model directories in the webroot. Don't forget the leading underscore (I made the dirs: _projects and _tests )
+* Add the required templates to each directory:
+** the index.html template is assumed to be used for the list page of whatever model dir it is in. It must also be named index.html however it doesnt have to be generated that way (see the jekyll_models_urls setting)
+** the template.html template is used to help generate each model. It is sent the page var with model defined on it to represent the current generating model. So for example, in template.html I could do {{ page.model.name }}. template.html should be created with that exact name unless you are specifing a different template to use in every model YAML file. (see the template setting)
+** Templates can also use YAML front matter!
+* Make some model YAML files in the model directories. These files must end with: ( .txt or .yml or .yaml or .textile ) or else they will be ignored. These files are just plain old YAML files and can contain whatever you want.
+* Generate your pages like normal! Your models will be generated and all the model objects will be attached to your global site var (like site.cars) for every page.
+
+h2. Available _config.yml settings:
+* jekyll_models:         
+** Required! A list of the users' model types. These need matching directories with an underscore prefix under the web root. (Ex. jekyll_models: [Projects, Albums, Cars]
+
+* jekyll_models_generate_pages: 
+** Should JekyllModels generate model pages? (true | false) Default value: true
+
+* jekyll_models_urls:
+** How Should JekyllModels organize generated models? 
+*** rest-like = (default) webroot.com/cars/jeep/index.html (with cars/index.html for the list page)
+*** models = webroot.com/cars/jeep.html (with cars/index.html for the list page)
+*** base = webroot.com/jeep.html (with webroot.com/cars.html for the list page)
+
+* site_base:
+** The url of the webroot. (ex http://www.mydomain.com/ ) If this is provided, JekyllModels can put each models' absolute url in "mdl_url" in its own object. This is for convenience when hyperlinking to models.
+
+h2. Model Structure and Meaning:
+In each model YAML file, some properties can be set to customize behaviour. Other properties are automatically set. Here is a list of what's available:
+
+* timestamp: 
+** You may set your own time to be sent in to jekyll like how posts have their time derived from their filename. This will be most usefull for sorting. YYYY-MM-DD is supported. If not specified, the YAML file modification date is used.
+
+* mdl_name:
+** This is automatically set by JekyllModels to match the YAML filename without the extension. This is used for generation.
+
+* mdl_type:
+** This is automatically set by JekyllModels to match the directory that the YAML file is in. (without the underscore prefix). This is used for generation.
+
+* mdl_url: 
+** If site_base is defined in _config.yml then this will automatically be set to the absolute url of this model's generated page.
+
+* template:
+** You may specify what template this model should use to help generate it. For example, if you have the template "car_temp.html" then you can set this to "car_temp". Do not include ".html". By default, this is set to "template"
+
+h2. Update History: (most recent first)
+* 20-Jun-2012 kyle paulsen -- First public release. 

@@ -1,0 +1,13 @@
+---
+layout: list
+---
+
+Here are my test models:
+
+<ul>
+{% for model in site.tests %}
+  <li>
+    <a href="{{ model.mdl_name }}/">Click here to see my {{ model.mdl_name }} test!</a>
+  </li>
+{% endfor %}
+</ul>
