@@ -164,7 +164,7 @@ module JekyllModels
     def filter_entries(entries)
       entries = entries.reject do |e|
         ext = File.extname(e)
-        (ext != ".txt" && ext != ".yml" && ext != ".yaml" && ext != ".textile") ||
+        (ext != ".txt" && ext != ".yml" && ext != ".yaml") ||
         ['.', '_', '#'].include?(e[0..0]) ||
         e[-1..-1] == '~' ||
         File.symlink?(e)
