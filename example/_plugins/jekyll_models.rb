@@ -29,7 +29,7 @@
 #         a different template to use in every model YAML file. (see the template setting)
 #     Templates can also use YAML front matter!
 #   Make some model YAML files in the model directories. These files must end with:
-#     ( .txt or .yml or .yaml or .textile ) or else they will be ignored. These files are 
+#     ( .txt or .yml or .yaml ) or else they will be ignored. These files are 
 #     just plain old YAML files and can contain whatever you want.
 #   Generate your pages like normal! Your models will be generated and all the model objects
 #     will be attached to your global site var (like site.cars) for every page.
@@ -234,7 +234,7 @@ module JekyllModels
 
   end
   
-  class ::Jekyll::ProductGenerator < ::Jekyll::Generator
+  class ::Jekyll::ModelGenerator < ::Jekyll::Generator
     safe true
     
     def initialize(config)
